@@ -7,8 +7,8 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def draw_menu(request, menu_name):
     current_url = request.path
-    # Q(parent__isnull=True) & Q(
-    menu_items = MenuItem.objects.filter(title__icontains=menu_name).all()
+
+    menu_items = MenuItem.objects.filter(Q(parent__isnull=True) & Q(title__icontains=menu_name)).all()
     
     menu_data = []
     for item in menu_items:
